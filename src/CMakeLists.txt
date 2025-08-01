@@ -23,7 +23,7 @@ set_property(TARGET engine PROPERTY CXX_STANDARD 23)
 target_compile_definitions(engine PUBLIC GLM_FORCE_DEPTH_ZERO_TO_ONE)
 target_include_directories(engine PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}")
 target_include_directories(engine PRIVATE "$ENV{VULKAN_SDK}/include")
-# target_include_directories(engine PRIVATE "$ENV{VULKAN_SDK}/include/glm")
+target_include_directories(engine PRIVATE "$ENV{VULKAN_SDK}/include/glm")
 
 target_link_libraries(engine PUBLIC vma glm Vulkan::Vulkan fmt::fmt stb_image SDL3::SDL3 vkbootstrap imgui fastgltf::fastgltf)
 

@@ -102,6 +102,7 @@ void VulkanEngine::init_vulkan()
     VkPhysicalDeviceVulkan12Features features12{.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_2_FEATURES};
     features12.bufferDeviceAddress = true;
     features12.descriptorIndexing = true;
+    features12.shaderFloat16 = true;
 
     // use vkbootstrap to select a gpu.
     // We want a gpu that can write to the SDL surface and supports vulkan 1.3 with the correct features
@@ -495,7 +496,7 @@ void VulkanEngine::init_background_pipelines()
 
     // layout code
     VkShaderModule computeDrawShader;
-    if (!vkutil::load_shader_module("../shaders/gradient.comp.spv", _device, &computeDrawShader))
+    if (!vkutil::load_shader_module("../shaders/gradient_slang.slang.spv", _device, &computeDrawShader))
     {
         fmt::print("Error when building the compute shader \n");
     }

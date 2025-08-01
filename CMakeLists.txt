@@ -48,3 +48,32 @@ add_custom_target(
     Shaders 
     DEPENDS ${SPIRV_BINARY_FILES}
     )
+
+find_program(SLANG_COMPILER slangc 
+  HINTS
+    $ENV{VULKAN_SDK}/bin
+  REQUIRED
+  DOC "Path to slangc"
+)
+message(STATUS "slangc found at: ${SLANG_COMPILER}")
+
+file(GLOB_RECURSE SLANG_SOURCE_FILES
+    "${PROJECT_SOURCE_DIR}/shaders/*.slang"
+    )
+
+foreach(SLANG ${SLANG_SOURCE_FILES})
+  message(STATUS "BUILDING SHADER")
+  get_filename_component(FILE_NAME ${SLANG} NAME)
+  set(SPIRV_SLANG "${PROJECT_SOURCE_DIR}/shaders/${FILE_NAME}.spv")
+  message(STATUS ${SLANG})
+  add_custom_command(
+    OUTPUT ${SPIRV_SLANG}
+    COMMAND ${SLANG_COMPILER} ${SLANG} -target spirv -o ${SPIRV_SLANG}
+    DEPENDS ${SLANG})
+  list(APPEND SPIRV_SLANG_BINARY_FILES ${SPIRV_SLANG})
+endforeach(SLANG)
+
+add_custom_target(
+    Shaders_slang 
+    DEPENDS ${SPIRV_SLANG_BINARY_FILES}
+    )
