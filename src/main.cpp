@@ -2,19 +2,18 @@
 
 #include "vk_engine.h"
 
-int main(int argc, char *argv[])
-{
-	std::println("Hello World!");
-	VulkanEngine engine;
+int main(int argc, char *argv[]) {
+  std::println("Hello World!");
+  VulkanEngine engine;
 
-	engine.init();
-	std::println("done init!");
+  engine.init();
+  std::println("done init!");
 
-	engine.run();
-	std::println("done run!");
+  engine.run();
+  std::println("done run!");
 
-	engine.cleanup();
-	std::println("done cleanup!");
+  engine.cleanup();
+  std::println("done cleanup!");
 
-	return 0;
+  return 0;
 }
