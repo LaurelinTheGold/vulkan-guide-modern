@@ -39,6 +39,7 @@ constexpr unsigned int FRAME_OVERLAP = 2;
 
 class VulkanEngine {
 public:
+  static bool s_triedToInit;
   bool _isInitialized{false};
   int _frameNumber{0};
   bool stop_rendering{false};
@@ -85,10 +86,6 @@ public:
   VkPipeline _gradientPipeline;
   VkPipelineLayout _gradientPipelineLayout;
 
-  //
-
-  static VulkanEngine &Get();
-
   // initializes everything in the engine
   void init();
 
@@ -116,4 +113,15 @@ private:
 
   void init_pipelines();
   void init_background_pipelines();
+
+  void init_imgui();
+
+  void draw_imgui(VkCommandBuffer cmd, VkImageView targetImageView);
+};
+
+struct ComputePushConstants {
+  glm::vec4 data1;
+  glm::vec4 data2;
+  glm::vec4 data3;
+  glm::vec4 data4;
 };

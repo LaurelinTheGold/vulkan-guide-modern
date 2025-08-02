@@ -71,6 +71,7 @@ foreach(SLANG ${SLANG_SOURCE_FILES})
     COMMAND ${SLANG_COMPILER} ${SLANG} -target spirv -o ${SPIRV_SLANG}
     DEPENDS ${SLANG})
   list(APPEND SPIRV_SLANG_BINARY_FILES ${SPIRV_SLANG})
+  message(STATUS ${SPIRV_SLANG})
 endforeach(SLANG)
 
 add_custom_target(
